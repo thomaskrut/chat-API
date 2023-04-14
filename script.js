@@ -1,12 +1,14 @@
 let getActiveUsersCallback = initGetActiveUsers('__anonymous__')
+let getMessagesCalleback = initGetMessages('__anonymous__')
 
 
 function join() {
     event.preventDefault()
     username = document.getElementById('sender').value
     clearInterval(getActiveUsersCallback)
+    clearInterval(getMessagesCalleback)
     getActiveUsersCallback = initGetActiveUsers(username)
-    
+    getMessagesCalleback = initGetMessages(username)
 }
 
 function send() {
