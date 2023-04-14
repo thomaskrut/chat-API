@@ -1,8 +1,12 @@
+let getActiveUsersCallback = initGetActiveUsers('__anonymous__')
+
+
 function join() {
     event.preventDefault()
     username = document.getElementById('sender').value
-    initGetMessages(username)
-    initGetActiveUsers(username)
+    clearInterval(getActiveUsersCallback)
+    getActiveUsersCallback = initGetActiveUsers(username)
+    
 }
 
 function send() {
@@ -24,14 +28,14 @@ function send() {
 
 function initGetActiveUsers(username) {
 
-    setInterval(() => {
+    return setInterval(() => {
         const xhr2 = new XMLHttpRequest()
         xhr2.open('GET', 'https://messserver-thomaskkrut.b4a.run/activeusers/' + username)
         xhr2.send()
         xhr2.onload = () => {
             const activeusers = JSON.parse(xhr2.response)
             console.log(activeusers)
-            if (activeusers.length > 0) {
+          
                 const activeusersDiv = document.getElementById('activeusers')
                 activeusersDiv.innerHTML = ''
                 activeusers.forEach(activeuser => {
@@ -42,7 +46,7 @@ function initGetActiveUsers(username) {
                     `
                     activeusersDiv.appendChild(activeuserDiv)
                 })
-            }
+            
         }
 
     }, 3000)
