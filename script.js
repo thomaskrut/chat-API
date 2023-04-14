@@ -57,8 +57,8 @@ function initGetActiveUsers(username) {
 }
 
 function initGetMessages(username) {
-    console.log(username)
-    setInterval(() => {
+    
+    return setInterval(() => {
         const xhr1 = new XMLHttpRequest()
         xhr1.open('GET', 'https://messserver-thomaskkrut.b4a.run/message/' + username)
         xhr1.send()
